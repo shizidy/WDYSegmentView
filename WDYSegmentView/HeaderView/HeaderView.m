@@ -34,10 +34,6 @@
     
 }
 
-- (void)menuButtonAction:(UIButton *)btn {
-    
-}
-
 #pragma mark ========== UICollectionViewDataSource ==========
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.menuArray.count;
@@ -74,7 +70,7 @@
         } completion:^(BOOL finished) {
             
         }];
-        
+        //字体大小
         for (int i = 0; i < self.homeViewModel.menuArray.count; i++) {
             if (i == indexPath.item) {
                 [self.fontArray replaceObjectAtIndex:i withObject:@(0.25 + 1)];
@@ -87,7 +83,7 @@
         if (indexPath.item <= 2) {
             [self.collectionView setContentOffset:CGPointMake(0, 0) animated:YES];
         }
-        
+        //collectionView动画
         if (indexPath.item > 2 && indexPath.item < self.homeViewModel.menuArray.count - 2) {
             [self.collectionView setContentOffset:CGPointMake((indexPath.item - 2)*(kscreenWidth/5), 0) animated:YES];
         }
