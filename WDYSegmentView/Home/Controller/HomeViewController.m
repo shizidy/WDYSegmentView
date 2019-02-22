@@ -25,7 +25,6 @@
 @property (nonatomic, strong) HeaderView *headerView;
 @property (nonatomic, strong) ContentView *contentView;
 @property (nonatomic, strong) HomeViewModel *homeViewModel;
-@property (nonatomic, assign) CGPoint tempPoint;
 @end
 
 @implementation HomeViewController
@@ -42,7 +41,6 @@
 
 #pragma mark ========== UIScrollViewDelegate ==========
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    self.tempPoint = scrollView.contentOffset;
     self.headerView.startOffsetX = scrollView.contentOffset.x;
 }
 
@@ -79,7 +77,7 @@
     
 }
 
-
+#pragma mark ========== 懒加载 ==========
 - (HeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kscreenWidth, 50) menuArray:self.homeViewModel.menuArray];
