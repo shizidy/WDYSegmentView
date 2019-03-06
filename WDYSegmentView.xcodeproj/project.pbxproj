@@ -175,8 +175,8 @@
 		9A406F23221CE1B700F798C8 /* HeaderView */ = {
 			isa = PBXGroup;
 			children = (
-				9A406F24221CE1B700F798C8 /* HeaderView.m */,
 				9A406F25221CE1B700F798C8 /* HeaderView.h */,
+				9A406F24221CE1B700F798C8 /* HeaderView.m */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -184,10 +184,10 @@
 		9A406F26221CE1B700F798C8 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				9A406F27221CE1B700F798C8 /* BaseView.m */,
-				9A406F28221CE1B700F798C8 /* BaseViewController.m */,
 				9A406F29221CE1B700F798C8 /* BaseView.h */,
+				9A406F27221CE1B700F798C8 /* BaseView.m */,
 				9A406F2A221CE1B700F798C8 /* BaseViewController.h */,
+				9A406F28221CE1B700F798C8 /* BaseViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -250,8 +250,8 @@
 		9A406F40221CE1B700F798C8 /* ContentView */ = {
 			isa = PBXGroup;
 			children = (
-				9A406F41221CE1B700F798C8 /* ContentView.m */,
 				9A406F42221CE1B700F798C8 /* ContentView.h */,
+				9A406F41221CE1B700F798C8 /* ContentView.m */,
 			);
 			path = ContentView;
 			sourceTree = "<group>";

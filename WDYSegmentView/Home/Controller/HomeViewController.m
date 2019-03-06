@@ -20,6 +20,7 @@
 #define kscreenHeight [UIScreen mainScreen].bounds.size.height
 #define kStatusBarHeight        [[UIApplication sharedApplication] statusBarFrame].size.height
 #define kTopBarHeight           (44.f)
+#define kScreenItemNum 5
 
 @interface HomeViewController () <HeaderViewDelegate, UIScrollViewDelegate>
 @property (nonatomic, strong) HeaderView *headerView;
@@ -46,13 +47,13 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetX = scrollView.contentOffset.x;
-    self.headerView.slideView.frame = CGRectMake(offsetX/5, CGRectGetMinY(self.headerView.slideView.frame), CGRectGetWidth(self.headerView.slideView.frame), CGRectGetHeight(self.headerView.slideView.frame));
+    self.headerView.slideView.frame = CGRectMake(offsetX/kScreenItemNum, CGRectGetMinY(self.headerView.slideView.frame), CGRectGetWidth(self.headerView.slideView.frame), CGRectGetHeight(self.headerView.slideView.frame));
     self.headerView.offsetX = offsetX;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat offsetX = scrollView.contentOffset.x;
-    self.headerView.slideView.frame = CGRectMake(offsetX/kscreenWidth * (kscreenWidth/5), CGRectGetMinY(self.headerView.slideView.frame), CGRectGetWidth(self.headerView.slideView.frame), CGRectGetHeight(self.headerView.slideView.frame));
+    self.headerView.slideView.frame = CGRectMake(offsetX/kscreenWidth * (kscreenWidth/kScreenItemNum), CGRectGetMinY(self.headerView.slideView.frame), CGRectGetWidth(self.headerView.slideView.frame), CGRectGetHeight(self.headerView.slideView.frame));
     self.headerView.offsetX = offsetX;
 }
 

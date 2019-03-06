@@ -9,8 +9,9 @@
 #import "HeaderView.h"
 #define kscreenWidth [UIScreen mainScreen].bounds.size.width
 #define kscreenHeight [UIScreen mainScreen].bounds.size.height
+#define kScreenItemNum 5
 
-@interface HeaderView () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface HeaderView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *menuArray;
 @property (nonatomic, strong) NSMutableArray *fontArray;
@@ -59,14 +60,24 @@
 }
 
 #pragma mark ========== UICollectionViewDelegate ==========
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kscreenWidth/5, 50);
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.homeViewModel.menuArray.count > 4) {
+        return CGSizeMake(kscreenWidth/kScreenItemNum, 50);
+    } else {
+        return CGSizeMake(kscreenWidth/self.homeViewModel.menuArray.count, 50);
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (CGRectGetMinX(self.slideView.frame) != indexPath.item * (CGRectGetWidth(self.frame)/5)) {
+    CGFloat itemWidth = 0;
+    if (self.homeViewModel.menuArray.count < kScreenItemNum) {
+        itemWidth = CGRectGetWidth(self.frame)/self.homeViewModel.menuArray.count;
+    } else {
+        itemWidth = CGRectGetWidth(self.frame)/kScreenItemNum;
+    }
+    if (CGRectGetMinX(self.slideView.frame) != indexPath.item * itemWidth) {
         [UIView animateWithDuration:0.2 animations:^{
-            self.slideView.frame = CGRectMake(indexPath.item * (CGRectGetWidth(self.frame)/5), CGRectGetMinY(self.slideView.frame), CGRectGetWidth(self.slideView.frame), CGRectGetHeight(self.slideView.frame));
+            self.slideView.frame = CGRectMake(indexPath.item * itemWidth, CGRectGetMinY(self.slideView.frame), CGRectGetWidth(self.slideView.frame), CGRectGetHeight(self.slideView.frame));
         } completion:^(BOOL finished) {
             
         }];
@@ -80,12 +91,16 @@
         }
         [self.collectionView reloadData];
         
-        if (indexPath.item <= 2) {
+        if (indexPath.item <= (int)(kScreenItemNum/2)) {
             [self.collectionView setContentOffset:CGPointMake(0, 0) animated:YES];
         }
         //collectionView动画
-        if (indexPath.item > 2 && indexPath.item < self.homeViewModel.menuArray.count - 2) {
-            [self.collectionView setContentOffset:CGPointMake((indexPath.item - 2)*(kscreenWidth/5), 0) animated:YES];
+        if (indexPath.item > (int)(kScreenItemNum/2) && indexPath.item < self.homeViewModel.menuArray.count - (int)(kScreenItemNum/2)) {
+            [self.collectionView setContentOffset:CGPointMake((indexPath.item - (int)(kScreenItemNum/2))*(kscreenWidth/kScreenItemNum), 0) animated:YES];
+        }
+        
+        if (indexPath.item >= self.homeViewModel.menuArray.count - (int)(kScreenItemNum/2)) {
+            [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentSize.width - kscreenWidth, 0) animated:YES];
         }
         
         if ([self.delegate respondsToSelector:@selector(collectionView:selectItemAtIndexPath:)]) {
@@ -128,13 +143,19 @@
     }
     [self.collectionView reloadData];
     
-    if (index <= 2) {
+    if (index <= kScreenItemNum/2) {
         [self.collectionView setContentOffset:CGPointMake(0, 0) animated:YES];
     }
     
-    if (index > 2 && index < self.homeViewModel.menuArray.count - 2) {
-        [self.collectionView setContentOffset:CGPointMake((index - 2)*(kscreenWidth/5), 0) animated:YES];
+    if (index > kScreenItemNum/2 && index < self.homeViewModel.menuArray.count - kScreenItemNum/2) {
+        [self.collectionView setContentOffset:CGPointMake((index - kScreenItemNum/2)*(kscreenWidth/kScreenItemNum), 0) animated:YES];
     }
+    
+    if (index >= self.homeViewModel.menuArray.count - (int)(kScreenItemNum/2)) {
+        [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentSize.width - kscreenWidth, 0) animated:YES];
+    }
+    
+    
 }
 
 - (UICollectionView *)collectionView {
