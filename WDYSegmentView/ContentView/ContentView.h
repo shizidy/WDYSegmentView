@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ContentView : BaseView
 @property (nonatomic, weak) id <ContentViewDelegate> delegate;
 @property (nonatomic, strong) UIScrollView *scrollView;
-- (instancetype)initWithFrame:(CGRect)frame homeViewController:(UIViewController *)homeVC homeViewModel:(HomeViewModel *)homeViewModel;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id)delegate homeViewModel:(HomeViewModel *)homeViewModel;
 @end
 
 NS_ASSUME_NONNULL_END

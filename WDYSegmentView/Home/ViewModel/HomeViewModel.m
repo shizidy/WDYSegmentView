@@ -10,9 +10,15 @@
 
 @implementation HomeViewModel
 
+- (instancetype)init {
+    if (self = [super init]) {
+    }
+    return self;
+}
+
 - (NSMutableArray *)menuArray {
     if (!_menuArray) {
-        _menuArray = [NSMutableArray arrayWithObjects:@"菜单1", @"菜单2", @"菜单3", @"菜单4", @"菜单5", @"菜单6", nil];
+        _menuArray = [NSMutableArray array];
     }
     return _menuArray;
 }

@@ -1,18 +1,18 @@
 //
-//  SixViewController.m
-//  CustomSegmentView
+//  SevenViewController.m
+//  WDYSegmentView
 //
-//  Created by Macmini on 2019/2/18.
-//  Copyright © 2019 Macmini. All rights reserved.
+//  Created by wdyzmx on 2020/10/20.
+//  Copyright © 2020 Macmini. All rights reserved.
 //
 
-#import "SixViewController.h"
+#import "SevenViewController.h"
 
-@interface SixViewController ()
+@interface SevenViewController ()
 
 @end
 
-@implementation SixViewController
+@implementation SevenViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -14,16 +14,17 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol HeaderViewDelegate <NSObject>
 @optional
 - (void)collectionView:(UICollectionView *)collectionView selectItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)collectionView:(UICollectionView *)collectionView startSelectItemIndexPath:(NSIndexPath *)indexPath;
+- (void)collectionView:(UICollectionView *)collectionView endSelectItemIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
 @interface HeaderView : BaseView
-@property (nonatomic, strong) HomeViewModel *homeViewModel;
 @property (nonatomic, weak) id <HeaderViewDelegate> delegate;
 @property (nonatomic, strong) UIView *slideView;
 @property (nonatomic, assign) CGFloat offsetX;
 @property (nonatomic, assign) CGFloat startOffsetX;
-- (instancetype)initWithFrame:(CGRect)frame menuArray:(NSMutableArray *)menuArr;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id)delegate viewModel:(HomeViewModel *)viewModel;
 @end
 
 NS_ASSUME_NONNULL_END

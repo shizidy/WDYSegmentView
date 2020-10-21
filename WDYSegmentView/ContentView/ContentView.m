@@ -14,13 +14,15 @@
 
 @implementation ContentView
 
-- (instancetype)initWithFrame:(CGRect)frame homeViewController:(nonnull UIViewController *)homeVC homeViewModel:(nonnull HomeViewModel *)homeViewModel {
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id)delegate homeViewModel:(HomeViewModel *)homeViewModel {
     if (self = [super initWithFrame:frame]) {
         self.homeViewModel = homeViewModel;
+        self.delegate = delegate;
         [self addSubview:self.scrollView];
-        for (int i = 0; i < homeVC.childViewControllers.count; i++) {
-            UIViewController *vc = homeVC.childViewControllers[i];
-            vc.view.frame = CGRectMake(i*frame.size.width, 0, frame.size.width, frame.size.height);
+        UIViewController *rootVC = delegate;
+        for (int i = 0; i < rootVC.childViewControllers.count; i++) {
+            UIViewController *vc = rootVC.childViewControllers[i];
+            vc.view.frame = CGRectMake(i * frame.size.width, 0, frame.size.width, frame.size.height);
             [self.scrollView addSubview:vc.view];
         }
     }
@@ -38,7 +40,7 @@
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
-        _scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.frame)*self.homeViewModel.menuArray.count, 0);
+        _scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * self.homeViewModel.menuArray.count, 0);
         _scrollView.pagingEnabled = YES;
     }
     return _scrollView;
