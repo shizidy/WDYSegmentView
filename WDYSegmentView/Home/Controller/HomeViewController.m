@@ -23,7 +23,6 @@
 @property (nonatomic, strong) ContentView *contentView;
 @property (nonatomic, strong) HomeViewModel *homeViewModel;
 @property (nonatomic, assign) CGFloat startX;
-@property (nonatomic, assign) CGFloat endX;
 @end
 
 @implementation HomeViewController
@@ -82,10 +81,9 @@
     CGFloat offsetX = scrollView.contentOffset.x;
     CGFloat slideViewY = CGRectGetMinY(self.headerView.slideView.frame);
     CGFloat slideViewH = CGRectGetHeight(self.headerView.slideView.frame);
-    CGFloat slideViewX = offsetX / self.homeViewModel.titleItemNum;
+    CGFloat slideViewX = (offsetX / kscreenWidth) * (kscreenWidth / self.homeViewModel.titleItemNum);
     self.headerView.slideView.frame = CGRectMake(slideViewX, slideViewY, self.homeViewModel.titleItemWidth, slideViewH);
     self.headerView.offsetX = offsetX;
-    self.endX = CGRectGetMinX(self.headerView.slideView.frame);
 }
 
 #pragma mark - setUI
@@ -116,7 +114,6 @@
     [self.view addSubview:self.contentView];
     
     self.startX = 0;
-    self.endX = 0;
 }
 
 #pragma mark - 懒加载

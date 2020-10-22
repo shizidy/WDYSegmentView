@@ -71,6 +71,7 @@
     if ([self.delegate respondsToSelector:@selector(collectionView:startSelectItemIndexPath:)]) {
         [self.delegate collectionView:collectionView startSelectItemIndexPath:indexPath];
     }
+    
     if (CGRectGetMinX(self.slideView.frame) != indexPath.item * self.homeViewModel.titleItemWidth) {
         [UIView animateWithDuration:0.2 animations:^{
             self.slideView.frame = CGRectMake(indexPath.item * self.homeViewModel.titleItemWidth, CGRectGetMinY(self.slideView.frame), CGRectGetWidth(self.slideView.frame), CGRectGetHeight(self.slideView.frame));
